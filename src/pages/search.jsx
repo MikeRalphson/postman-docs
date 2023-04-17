@@ -3,7 +3,6 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import styled from "styled-components";
 import { Divider } from 'aether-marketing';
-import algoliasearch from 'algoliasearch/lite';
 import { 
   InstantSearch,
   SearchBox,
@@ -14,24 +13,13 @@ import {
   useInstantSearch,
   Configure
 } from 'react-instantsearch-hooks-web';
-
+import { searchClient } from '../utils/searchClient.js';
 
 /* URL manipulation
 **********************************************/ 
 import { history } from 'instantsearch.js/es/lib/routers';
 
-/* Support Dev and Prod indeces for Algolia
-**********************************************/ 
-const searchOnlyKey = process.env.NODE_ENV === 'development' ? '003daeb8de202d4a917c2395628d75a8' : '69f2c5376f1a90912c6c3b6b772c25bc';
-const algoliaIndex = process.env.NODE_ENV === 'development' ? 'dev_docs' : 'docs';
-
-
-/* Algolia Search API Keys
-**********************************************/ 
-const searchClient = algoliasearch(
-  '4A5N71XYH0',
-  searchOnlyKey
-);
+const searchIndex = process.env.NODE_ENV === 'development' ? 'dev_docs' : 'docs';
 
 /* Styling
 **********************************************/ 
@@ -121,14 +109,14 @@ const routing = {
   router: history(),
   stateMapping: {
     stateToRoute(uiState) {
-      const indexUiState = uiState[algoliaIndex];
+      const indexUiState = uiState[searchIndex];
       return {
         q: indexUiState.query
       }
     },
     routeToState(routeState) {
       return {
-        [algoliaIndex]: {
+        [searchIndex]: {
           query: routeState.q
         }
       }
@@ -136,7 +124,7 @@ const routing = {
   }
 };
 
-/* Render Algolia results 
+/* Render AI Search results 
 **********************************************/ 
 function Hit({ hit }) {
   return (
@@ -198,7 +186,7 @@ const SearchPage = () => (
         <Breadcrumbs>Postman Docs / Search Results</Breadcrumbs>
           <InstantSearch 
               searchClient={searchClient} 
-              indexName={algoliaIndex}
+              indexName={searchIndex}
               routing={routing}
             >
             <SearchBox  

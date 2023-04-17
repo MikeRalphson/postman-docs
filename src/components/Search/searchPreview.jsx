@@ -27,7 +27,7 @@ const Hits = ({ hits }) => {
   <ul className="style">
     {hits.length < 1 ? <li>No search results found</li> : ''}
     {hits.map((hit) => {
-      // handles develop and prod Algolia index
+      // handles develop and prod search index
       const excerpt = hit._snippetResult && hit._snippetResult.excerpt.value ? hit._snippetResult.excerpt.value : hit.excerpt
       return (
       <li key={hit.title}>

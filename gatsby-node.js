@@ -40,12 +40,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       value: lastModifiedTime,
     })
   }
-  // display console error if algolia indexed frontmatter length exceeds 9999 bytes on build
-  if (node.internal.type === 'frontmatterLength') {
-    if(JSON.parse(node.internal.content).value > 9999) {
-      console.error("IMPORTANT: Frontmatter has too many characters");
-    }
-  }
 };
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -132,8 +126,6 @@ exports.sourceNodes = async ({
       const { data } = frontmatter(fs.readFileSync(val));
       mdFrontmatterCharacterCount.push(data.title, data.search_keyword);
       excerptCharacterCount.push(data.excerpt)
-      // const algoliaLength = JSON.stringify(val[data]);
-      // h = algoliaLength;
       const order = data.order || 200;
       return [val, order];
     })

@@ -5,7 +5,6 @@ Airtable
 Akamai
 Akamai EdgeGrid
 alert
-Algolia
 allowlist
 Amazon
 apdex

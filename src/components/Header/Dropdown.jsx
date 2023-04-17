@@ -1,8 +1,7 @@
 import React from 'react';
 import { useEffect, useRef, useState } from "react";
 
-/* Algolia Imports */
-import algoliasearch from 'algoliasearch/lite';
+/* AI search Imports */
 import {
   InstantSearch,
   SearchBox,
@@ -12,32 +11,9 @@ import {
 } from 'react-instantsearch-dom';
 import { SearchWrapperStyling } from '../Search/searchStyles.jsx';
 import { CustomHits } from '../Search/searchPreview.jsx';
+import { searchClient } from '../../utils/searchClient.js';
 
-  const searchOnlyKey = process.env.NODE_ENV === 'development' ? '003daeb8de202d4a917c2395628d75a8' : '69f2c5376f1a90912c6c3b6b772c25bc';
-  const algoliaIndex = process.env.NODE_ENV === 'development' ? 'dev_docs' : 'docs';
-
-
-  /* Algolia Search Bar */
-  const algoliaClient = algoliasearch(
-    '4A5N71XYH0',
-    searchOnlyKey
-  );
-
-  
-
-  // removes empty query searches from analytics
-  const searchClient = {
-    search(requests) {
-      const newRequests = requests.map((request) => {
-        // test for empty string and change request parameter: analytics
-        if (!request.params.query || request.params.query.length === 0) {
-          request.params.analytics = false;
-        }
-        return request;
-      });
-      return algoliaClient.search(newRequests);
-    },
-  };
+const searchIndex = process.env.NODE_ENV === 'development' ? 'dev_docs' : 'docs';
 
 const Dropdown = () => {
   const ref = useRef();
@@ -65,7 +41,7 @@ const Dropdown = () => {
       <div className="wrapper" ref={ref}>
         <InstantSearch
           searchClient={searchClient}
-          indexName={algoliaIndex}
+          indexName={searchIndex}
           refresh={refresh}
         >
           <Configure hitsPerPage={5} />

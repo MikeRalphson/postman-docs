@@ -125,10 +125,6 @@ If you would like to add, edit, or replace Markdown code blocks you are welcome 
 
 For a list of supported languages by the Prism syntax highlighter, [read more](https://lucidar.me/en/web-dev/list-of-supported-languages-by-prism/). When in doubt, use `text`, `bash` or `shell` to keep the code block from interfering.
 
-## Algolia
-
-Please note that Algolia search won't work when running the app locally. If you wish to search when running the app locally, you are welcome to use your own Algolia API keys and index the app in your own Algolia account. You can find an `env.example` file in the repo that shows you what keys you require to run Algolia search.
-
 ## Right sidebar - recent blog posts
 
 The right sidebar has a feature flag for pulling in up to three contextual, recent blog posts based on a tag. This functionality and flag can be found in the front matter of the doc `.md` files. It uses our webhook and backend-for-frontend (BFF) service to source the latest 100 blog posts from blog.postman.com.

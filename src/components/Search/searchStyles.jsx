@@ -73,7 +73,7 @@ ais-highlight-0000000000 {
   font-size: 0.001px;
 }
 
-// Algolia Search Styling
+// AI Search Styling
 
 .searchbox {
   ::placeholder {

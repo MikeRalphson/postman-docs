@@ -431,7 +431,7 @@ const Header = (props) => {
             className="collapse navbar-collapse"
             id="navbarSupportedContentBottom"
           >
-            {/* Algolia Widgets */}
+            {/* Search Widgets */}
             <SearchWrapperStyling className="form-inline header__search  ml-auto">
               <svg
                 className="nav-search__icon"
